@@ -1,4 +1,4 @@
-	</main>
-	<?php render('wraps/footer') ?>
+</main>
+<?php render('wraps/footer') ?>
 </body>
 </html>

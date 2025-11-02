@@ -1,11 +1,13 @@
 <?php
-function render(string $component) {
-	global $opts;
+function render(string $component, ?array $g_data = null) {
+	global $data;
+	if (!is_null($g_data)) { $data = $g_data; }
 	require COMPONENTS_DIR . "/$component.php";
 }
 
-function render_page(array|callable|string $content, array $g_opts = []) {
-	global $opts; $opts = $g_opts;
+function render_page(array|callable|string $content, array $g_data = []) {
+	global $data;
+	$data = $g_data;
 
 	render('wraps/top');
 	if (is_string($content)) { echo "$content"; }

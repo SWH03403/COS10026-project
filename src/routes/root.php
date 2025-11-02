@@ -1,2 +1,2 @@
 <?php
-render_page('Page content');
+render_page(['intro'], ['title' => 'Home', 'style' => 'home']);
