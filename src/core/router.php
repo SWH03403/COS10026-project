@@ -8,7 +8,7 @@ class Request {
 	public static function method(): string { return $_SERVER['REQUEST_METHOD']; }
 	public static function is_post(): bool { return self::method() == 'POST'; }
 
-	public static function header(string $key): string { return $_SERVER["HTTP_$key"]; }
+	public static function header(string $key): ?string { return $_SERVER["HTTP_$key"] ?? null; }
 
 	public static function param(string $key, bool $trim = true, bool $html = false): ?string {
 		$dict = is_post()? $_POST : $_GET;
@@ -21,19 +21,48 @@ class Request {
 }
 
 class Catcher {
-	private static function code(int $code): never {
+	private static function code(int $code, bool $msg = true): never {
 		http_response_code($code);
-		render("status/$code");
+		if ($msg) { render("status/$code"); }
 		exit;
 	}
 
+	public static function not_modified(): never { self::code(302, false); }
 	public static function not_found(): never { self::code(404); }
 	public static function internal_error(): never { self::code(500); }
 }
 
 class Router {
 	private const DEFAULT = 'root';
+	private const STREAM_BLOCKSIZE = 4096;
 
+	private static function stream_asset(string $path) {
+		$file = ASSETS_DIR . $path;
+		if (!is_readable($file)) { return; }
+		$fd = fopen($file, 'rb');
+		if ($fd === false) { Catcher::internal_error(); }
+
+		// Check if client's cache is valid
+		$etag = md5_file($file);
+		if (Request::header('IF_NONE_MATCH') === $etag) { Catcher::not_modified(); }
+
+		// Response with file metadata
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mime = finfo_file($finfo, $file);
+		finfo_close($finfo);
+		header("ETag: $etag");
+		header("Content-Type: $mime");
+
+		// Print file content as chunks.
+		while (!feof($fd)) {
+			echo fread($fd, self::STREAM_BLOCKSIZE);
+			if (ob_get_level() > 0) { ob_flush(); }
+			flush();
+		}
+		fclose($fd);
+
+		exit;
+	}
 	private static function load_page(string $path) {
 		$root = empty($path);
 		$path = $root? self::DEFAULT : $path;
@@ -52,6 +81,10 @@ class Router {
 
 	public static function route() {
 		$path = Request::path();
+		if (str_starts_with($path, 'static/')) {
+			$asset_path = substr($path, strpos($path, '/'));
+			self::stream_asset($asset_path);
+		}
 		self::load_page($path);
 		Catcher::not_found();
 	}
