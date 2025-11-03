@@ -33,4 +33,7 @@ class Dirs {
 
 foreach (Dirs::core_modules() as $module) { require $module; }
 
+// CLI-mode execution
+if (isset($argv)) { require __DIR__ . '/src/cli.php'; exit(0); }
+
 Router::route();
