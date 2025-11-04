@@ -19,10 +19,10 @@ class Dirs {
 			if ($name == '.' || $name == '..') { continue; }
 			$path = "$dir/$name";
 			if (is_dir($path)) {
-				$files = array_merge($files, self::list($path, $files));
+				$files = array_merge($files, self::list($path));
 			} else {
 				if (!str_ends_with($name, '.php')) { continue; }
-				array_push($files, $path);
+				$files[] = $path;
 			}
 		}
 		return $files;

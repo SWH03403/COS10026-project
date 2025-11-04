@@ -24,8 +24,7 @@ class Database {
 		$result = $query->execute();
 		if ($result === false) { return null; }
 		if (!str_starts_with($stmt, 'SELECT')) { return []; }
-		$rows = [];
-		while ($row = $result->fetchArray(SQLITE3_ASSOC)) { array_push($rows, $row); }
-		return $rows;
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) { $rows[] = $row; }
+		return $rows ?? [];
 	}
 }
