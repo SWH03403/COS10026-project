@@ -1,4 +1,8 @@
-# COS12006 "Web Technology Project"
+# COS10026 "Web Technology Project"
+
+The group assignment taking the majority of the score of this class.
+
+## Goal
 
 A website to advertise/apply for vacant employment positions.
 
