@@ -35,5 +35,5 @@ CREATE TABLE job_requirement (
 	name TEXT NOT NULL,
 	value TEXT NOT NULL,
 
-	PRIMARY KEY(job_id, name)
+	PRIMARY KEY(id, name)
 ) WITHOUT ROWID;
