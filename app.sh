@@ -7,7 +7,7 @@ ADDRESS='127.0.0.1:9524'
 _err() { echo "Err: $1!" >&2; exit 1; }
 
 for php in \
-	"$(which php)" \
+	"$(which php 2>dev/null)" \
 	'/bin/php' \
 	'/usr/bin/php' \
 	'/c/xampp/php/php' \
