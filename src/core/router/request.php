@@ -1,7 +1,8 @@
 <?php
 class Request {
 	public static function path(): string {
-		$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '';
+		$path = $_SERVER['REQUEST_URI'] ?? '';
+		$path = parse_url($path, PHP_URL_PATH)?: $path;
 		$path = trim($path, '/');
 		return preg_replace(':/+:', '/', $path);
 	}
