@@ -18,7 +18,14 @@ foreach ($db->query('SELECT * FROM job ORDER BY name') as $row) {
 	$cates[$row['category_id']]['entries'][] = $row;
 }
 
+// Move empty sections to end of list
+foreach ($cates as $section) {
+	if (empty($section['entries'])) { $empties[] = $section; } else { $sections[] = $section; }
+}
+$sections = array_merge($sections, $empties);
+
 render_page(['listing'], [
 	'title' => 'Jobs Listing',
 	'style' => 'listing',
+	'sections' => $sections,
 ]);
