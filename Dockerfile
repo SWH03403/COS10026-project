@@ -1,8 +1,9 @@
-FROM php:8.4-apache
-RUN a2enmod rewrite
-COPY ./ /var/www/html
-RUN rm -f /var/www/html/db.sqlite && \
-	chown www-data:www-data -R /var/www/html && \
-	find /var/www/html -type f -exec chmod 644 {} \; && \
-	find /var/www/html -type d -exec chmod 755 {} \;
-EXPOSE 80
+FROM tomsik68/xampp:8
+RUN rm -vrf /opt/lampp/htdocs
+WORKDIR /opt/lampp/htdocs
+COPY . .
+RUN \
+	chown daemon:daemon -vR . && \
+	find . -type f -exec chmod -v 644 {} \; && \
+	find . -type d -exec chmod -v 755 {} \;
+EXPOSE 22 80
