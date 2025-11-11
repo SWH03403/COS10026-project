@@ -14,7 +14,6 @@ class Migration {
 			$file = Dirs::MIGRATIONS . "/$base";
 
 			if (!is_readable($file)) { break; }
-			echo "Applying $base\n";
 
 			$data = file_get_contents($file);
 			foreach (explode(";\n", $data) as $stmt) {

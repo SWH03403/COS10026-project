@@ -33,7 +33,8 @@ class Dirs {
 
 foreach (Dirs::core_modules() as $module) { require $module; }
 
-// CLI-mode execution
-if (isset($argv)) { require __DIR__ . '/src/cli.php'; exit(0); }
-
+if (!Migration::run_all(Database::get())) {
+	echo 'Error while applying migrations!' . PHP_EOL;
+	exit(1);
+}
 Router::route();
