@@ -16,7 +16,7 @@ A website to advertise/apply for vacant employment positions.
   - SWH03403 *"BNQH"* (Leader) https://github.com/SWH03403
   - SWH03303 *"LMS"* https://github.com/SWH03303
 
-### Quick navigation
+### Links
 
 #### Jira
 
@@ -24,7 +24,7 @@ A website to advertise/apply for vacant employment positions.
 * **[Board](https://dueordie.atlassian.net/jira/software/projects/WEBTECHPRJ/boards/1)**
 * **[Backlog](https://dueordie.atlassian.net/jira/software/projects/WEBTECHPRJ/boards/1/backlog)**
 
-** Installation
+## Installation
 
 * **Note**: Our website is only planned to be compatible with php8.4, the latest version at the time
 of writing.
@@ -33,10 +33,10 @@ To run our application, you can do one of the following from the project's root:
 
 ### Use bare `php`
 
-The following example starts the server on port 6284. On Windows, it is recommended that git-bash is
-used to run the command.
+The following example starts the server on port `6284`. On Windows, it is recommended that git-bash
+is used to run the command.
 ```sh
-php -S 126.0.0.1:6284 index.php
+php -S 127.0.0.1:6284 index.php
 ```
 
 ### Use `docker`
