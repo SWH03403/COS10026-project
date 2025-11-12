@@ -1,4 +1,6 @@
 <?php
+if (Session::has_user()) { Router::return(); }
+
 $dname = null;
 $email = null;
 $errors = [];
@@ -17,7 +19,7 @@ if (Request::is_post()) {
 
 	User::register($email, $pass1, $dname);
 	User::login($email, $pass1);
-	Router::redirect(Router::DEFAULT);
+	Router::return();
 }
 end_post:
 
