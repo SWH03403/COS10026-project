@@ -12,7 +12,7 @@ class Session {
 		self::init();
 		session_regenerate_id(true);
 	}
-	private static function reset() {
+	public static function reset() {
 		self::init();
 		session_unset();
 		session_destroy();

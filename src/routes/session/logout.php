@@ -1,2 +1,3 @@
 <?php
-render_page('');
+Session::reset();
+Router::return();
