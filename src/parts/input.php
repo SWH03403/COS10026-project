@@ -1,11 +1,11 @@
 <?php
-$label = $data['label'];
-$name = $data['name'];
-$type = $data['type'] ?? 'text';
-$value = $data['persist'] ?? ($type == 'text');
-$required = $data['required'] ?? true;
+$label = $data[0] ?? $data['label'];
+$name = $data[1] ?? $data['name'];
+$type = $data[2] ?? $data['type'] ?? 'text';
+$persist = $data[3] ?? $data['persist'] ?? ($type == 'text');
+$required = $data[4] ?? $data['required'] ?? true;
 
-$value = Request::is_post()? html_sanitize(Request::param($name)) : null;
+$value = (Request::is_post() && $persist)? html_sanitize(Request::param($name)) : null;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
 
 global $_input_counter;

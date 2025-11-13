@@ -1,7 +1,7 @@
 <form class="box flex-y flex-o" method="post">
 	<?php
-	render('input', ['label' => 'Email', 'name' => 'email']);
-	render('input', ['label' => 'Password', 'name' => 'pass', 'type' => 'password']);
+	render('input', ['Email', 'email']);
+	render('input', ['Password', 'pass', 'password']);
 	?>
 	<button type="submit">Login</button>
 </form>
