@@ -1,4 +1,4 @@
-<form id="form-new-user" class="box flex-y flex-o" method="post">
+<form class="box flex-y flex-o" method="post">
 	<?php
 	render_input('Display Name', 'dname', value: $data['dname'], required: false);
 	render_input('Email', 'email', value: $data['email']);

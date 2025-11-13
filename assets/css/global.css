@@ -157,6 +157,7 @@ button[type="submit"] {
 
 	&:hover { background-color: #333; }
 }
+form > button[type="submit"] { margin-top: 20px; }
 
 /* Common flex attribute, `flex` is aliased to `flex-x` */
 .flex, .flex-x, .flex-y { display: flex; }
