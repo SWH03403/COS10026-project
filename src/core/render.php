@@ -5,15 +5,6 @@ function render(string $component, ?array $g_data = null) {
 	require Dirs::COMPONENTS . "/$component.php";
 }
 
-function render_links(array $routes) {
-	$cur = Request::path();
-	foreach ($routes as $url => $disp) {
-		$is_cur = (str_starts_with($url, '/') && substr($url, 1) === $cur)?
-			' class="current-page"' : '';
-		echo "<li><a href=\"$url\"$is_cur>$disp</a></li>";
-	}
-}
-
 $_input_counter = 0;
 function render_input(
 	string $label,

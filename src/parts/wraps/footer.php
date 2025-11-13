@@ -8,7 +8,7 @@ $external_routes = [
 <footer class="flex flex-o">
 	<nav id="external-navigation" class="fill flex">
 		<ul class="fill flex flex-o">
-			<?php render_links($external_routes) ?>
+			<?php render('links', $external_routes) ?>
 		</ul>
 	</nav>
 </footer>
