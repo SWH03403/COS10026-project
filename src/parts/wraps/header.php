@@ -14,9 +14,9 @@ if (Session::has_user()) {
 <header class="flex">
 	<nav id="global-navigation" class="fill flex">
 		<ul class="fill flex flex-o">
-			<?php render_links($main_routes) ?>
+			<?php render('links', $main_routes) ?>
 			<li class="fill"></li>
-			<?php render_links($session_routes) ?>
+			<?php render('links', $session_routes) ?>
 		</ul>
 	</nav>
 </header>
