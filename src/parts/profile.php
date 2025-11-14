@@ -3,7 +3,7 @@ $acc = $data['user']->account();
 $apl = $data['applicant'];
 $new = is_null($apl);
 ?>
-<h1>Hi, <?= $acc->display ?></h1>
+<h1>Hi, <?= html_sanitize($acc->display) ?></h1>
 <article id="account-container" class="box flex-y">
 	<div class="flex">
 		<h2>Account Info</h1>
@@ -12,7 +12,7 @@ $new = is_null($apl);
 	</div>
 	<div id="account-info">
 		<span>Email:</span>
-		<span><?= $acc->email ?></span>
+		<span><?= html_sanitize($acc->email) ?></span>
 		<span>Created at:</span>
 		<span><?= $acc->created->format(DATETIME_FORMAT) ?></span>
 		<span>Updated at:</span>
