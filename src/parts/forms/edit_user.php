@@ -17,6 +17,7 @@
 	]);
 	render('input', ['Repeat New Password', 'new-passrep', 'password', 'required' => false]);
 	render('input', ['Current Password', 'pass', 'password']);
+	render('csrf');
 	?>
 	<button type="submit">Update</button>
 </form>

@@ -6,6 +6,7 @@ if (Request::is_post()) {
 	$email = Request::param('email');
 	$pass = Request::param('pass', false);
 
+	if (!Csrf::check()) { $errors[] = 'Invalid CSRF token'; }
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }
 	if (!empty($errors)) { goto end_post; }
 

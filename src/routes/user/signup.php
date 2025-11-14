@@ -8,6 +8,7 @@ if (Request::is_post()) {
 	$pass1 = Request::param('pass1', false);
 	$pass2 = Request::param('pass2', false);
 
+	if (!Csrf::check()) { $errors[] = 'Invalid CSRF token'; }
 	if (strlen($dname) > 20) { $errors[] = 'Display name is too long'; }
 	if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) { $errors[] = 'Email is invalid'; }
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }

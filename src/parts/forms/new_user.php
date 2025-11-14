@@ -4,6 +4,7 @@
 	render('input', ['Email', 'email']);
 	render('input', ['Password', 'pass1', 'password']);
 	render('input', ['Repeat Password', 'pass2', 'password']);
+	render('csrf');
 	?>
 	<button type="submit">Sign up!</button>
 </form>

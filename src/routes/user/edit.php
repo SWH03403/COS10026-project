@@ -11,6 +11,7 @@ if (Request::is_post()) {
 	$pass_new = Request::param('new-pass', false);
 	$pass_rep = Request::param('new-passrep', false);
 
+	if (!Csrf::check()) { $errors[] = 'Invalid CSRF token'; }
 	if (strlen($display) > 20) { $errors[] = 'Display name is too long'; }
 	if ($check_email && filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
 		$errors[] = 'Email is invalid';
