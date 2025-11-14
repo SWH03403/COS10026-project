@@ -1,0 +1,20 @@
+@import "global.css";
+
+h2 { font-size: 20pt; }
+
+#account-info { width: 400px; }
+
+#account-grid {
+	display: grid;
+	grid-template-columns: 1fr max-content;
+	font-size: 16pt;
+}
+
+#account-edit {
+	font-size: 16pt;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	padding: 0 1em;
+	border-radius: var(--round);
+}

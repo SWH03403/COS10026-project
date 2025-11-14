@@ -18,8 +18,8 @@ class Account {
 		return new self(
 			$row['id'],
 			$row['display'],
-			DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row['created']),
-			DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $row['updated']),
+			new DateTimeImmutable($row['created'], new DateTimeZone('UTC')),
+			new DateTimeImmutable($row['updated'], new DateTimeZone('UTC')),
 			$email,
 			$mgr,
 		);
