@@ -4,6 +4,7 @@ $name = $data[1] ?? $data['name'];
 $type = $data[2] ?? $data['type'] ?? 'text';
 $persist = $data[3] ?? $data['persist'] ?? ($type == 'text');
 $required = $data[4] ?? $data['required'] ?? true;
+$placeholder = $data[5] ?? $data['placeholder'] ?? null;
 
 $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
@@ -13,11 +14,12 @@ $_input_counter = is_null($_input_counter)? 0 : $_input_counter;
 $id = 'input-auto-' . ($_input_counter += 1);
 $focus = ($_input_counter == 1)? ' autofocus' : '';
 $required = $required? ' required' : '';
+$placeholder = is_null($placeholder)? '' : " placeholder=\"$placeholder\"";
 
 echo <<<TEXT
 	<div class="flex">
 		<label for="$id">$label</label>
-		<input id="$id" class="fill" type="$type" name="$name"$value$required$focus>
+		<input id="$id" class="fill" type="$type" name="$name"$value$placeholder$required$focus>
 	</div>
 TEXT;
 ?>
