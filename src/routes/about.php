@@ -1,5 +1,5 @@
 <?php
-render_page(fn() => function() {
+render_page(function() {
 	echo <<<TEXT
 	<section class="fill flex-y flex-o box">
 		<img id="company-logo" src="/static/images/logos/duodie.png" alt="Company Logo">
