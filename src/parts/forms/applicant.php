@@ -7,6 +7,9 @@
 	</p>
 	<p>You can always update these data in the <span class="important">Profile</span> page.</p>
 </section>
+
+<?php render('errors', ['messages' => $data['errors']]); ?>
+
 <form id="personal-info" class="box flex-y" method="post">
 	<?php
 		head('Identity');
