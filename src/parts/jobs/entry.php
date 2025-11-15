@@ -1,3 +1,4 @@
+<?php $data = $arg_0; ?>
 <article class="flex-y flex-o box">
 	<div class="flex-y listing-front">
 		<h2><?= html_sanitize($data['name']) ?></h2>

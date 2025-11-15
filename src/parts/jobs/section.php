@@ -1,3 +1,4 @@
+<?php $data = $arg_0; ?>
 <h1 id="<?= $data['id'] ?>" class="flex box">
 	<?= $data['name'] ?>
 	<span class="fill"></span>

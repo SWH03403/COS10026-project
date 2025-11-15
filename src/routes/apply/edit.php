@@ -85,32 +85,32 @@ render_page(function() use ($errors) {
 	render('errors', $errors);
 	echo '<form id="personal-info" class="box flex-y" method="post">';
 	render_header('Identity');
-	render('input', ['First Name', 'first-name']);
-	render('input', ['Last Name', 'last-name']);
-	render('input', ['Date of Birth', 'dob', 'date', 'persist' => true]);
-	render('input/select', ['Gender', 'gender', [
+	render('input', 'First Name', 'first-name');
+	render('input', 'Last Name', 'last-name');
+	render('input', 'Date of Birth', 'dob', type: 'date');
+	render('input/select', 'Gender', 'gender', [
 		'm' => 'Male (he/him)',
 		'f' => 'Female (she/her)',
 		'x' => 'Non-binary (they/them)',
 		'?' => 'Prefer not to say',
-	]]);
+	]);
 
 	render_header('Address');
-	render('input', ['Street', 'street']);
-	render('input', ['Town', 'town']);
-	render('input/select', ['State', 'state', State::options()]);
-	render('input', ['Postcode', 'postcode', 'number']);
+	render('input', 'Street', 'street');
+	render('input', 'Town', 'town');
+	render('input/select', 'State', 'state', State::options());
+	render('input', 'Postcode', 'postcode', 'number');
 
 	render_header('Contact');
-	render('input', ['Phone No.', 'phone']);
+	render('input', 'Phone No.', 'phone');
 
 	render_header('Questions');
-	render('input/binary', [
+	render('input/binary',
 		'Are you willing to submit to a background check if selected for employment?',
 		'background',
-	]);
-	render('input/binary', ['Have you ever been convicted of a felony?', 'felony']);
-	render('input/binary', ['Are you a veteran?', 'veteran']);
+	);
+	render('input/binary', 'Have you ever been convicted of a felony?', 'felony');
+	render('input/binary', 'Are you a veteran?', 'veteran');
 	render('input/csrf');
 
 	echo '<button type="submit">Submit</button></form>';

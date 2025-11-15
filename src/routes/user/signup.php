@@ -28,10 +28,10 @@ end_post:
 
 render_page(function() use ($errors) {
 	echo '<form class="box flex-y flex-o" method="post">';
-	render('input', ['Display Name', 'dname', 'required' => false]);
-	render('input', ['Email', 'email']);
-	render('input', ['Password', 'pass1', 'password']);
-	render('input', ['Repeat Password', 'pass2', 'password']);
+	render('input', 'Display Name', 'dname', required: false);
+	render('input', 'Email', 'email');
+	render('input', 'Password', 'pass1', 'password');
+	render('input', 'Repeat Password', 'pass2', 'password');
 	render('input/csrf');
 	echo '<button type="submit">Sign up!</button></form>';
 	render('errors', $errors);
