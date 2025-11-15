@@ -13,7 +13,7 @@ class User {
 		$db = Database::get();
 		$hash = password_hash($pass, PASSWORD_DEFAULT);
 		$query = 'INSERT INTO user(email, hash, display) VALUES (?, ?, ?)';
-		$res = $db->query($query, [$email, $hash, $display]);
+		$res = @$db->query($query, [$email, $hash, $display]);
 		return !is_null($res);
 	}
 

@@ -16,9 +16,13 @@ if (Request::is_post()) {
 	if ($pass1 != $pass2) { $errors[] = 'Password repetition does not match'; }
 	if (!empty($errors)) { goto end_post; }
 
-	User::register($email, $pass1, $dname);
+	if (!User::register($email, $pass1, $dname)) {
+		$errors[] = 'Account with email has already existed';
+		goto end_post;
+	}
+
 	User::login($email, $pass1);
-	Router::return();
+	Router::redirect('user');
 }
 end_post:
 
