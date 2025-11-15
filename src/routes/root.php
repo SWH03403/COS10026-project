@@ -26,24 +26,28 @@ render_page(function() {
 
 	<div id="fre-asked-ques" class="flex-y flex">
 		<section id="fre-asked-ques-head" class="fill flex-o box">
-			<h2>Common questions</h2>
-			<p>Questions that are frequently asked about our job application platform.</p>
+			<h2>Frequently asked questions</h2>
+			<p>Expect more to come as we listen for feedbacks.</p>
 		</section>
 
 		<section id="questions" class="fill flex">
 			<article id="ques-1" class="questions box">
-				<h3>How do I create a profile?</h3>
+				<h3>How do I create an account?</h3>
 				<p>
-					To create an profile, click "Profile" and fill out the registration form with your details.
+					Click <span class="important">Sign Up</span> on top and fill out the registration
+					form with your info.
 				</p>
 			</article>
 			<article id="ques-2" class="questions box">
-				<h3>How do I apply for jobs?</h3>
-				<p>To apply for jobs, create an account by signing up and create your profile.</p>
+				<h3>How do I apply for a job?</h3>
+				<p>
+					To apply for a job you first need an account. Then, click
+					<span class="important">Apply</span> on top to build your personal profile.
+				</p>
 			</article>
 			<article id="ques-3" class="questions box">
-				<h3>Where can i find listed jobs?</h3>
-				<p>Navigate to the "Jobs" section to browse available job listings.</p>
+				<h3>Where can I find listed jobs?</h3>
+				<p>Click <span class="important">Jobs</span> to browse available job listings.</p>
 			</article>
 		</section>
 	</div>
