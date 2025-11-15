@@ -25,9 +25,7 @@ $new = is_null($apl);
 	<div class="flex">
 		<h2>Applicant Info</h1>
 		<div class="fill"></div>
-		<a class="edit-btn flex-y" href="<?= $new? '/apply' : '/apply/edit' ?>">
-			<?= $new? 'Apply' : 'Edit' ?>
-		</a>
+		<a class="edit-btn flex-y" href="/apply/edit"><?= $new? 'Apply' : 'Edit' ?></a>
 	</div>
 	<?php if (is_null($apl)): ?>
 		<span id="no-applicant-message">
