@@ -55,18 +55,20 @@ body > main {
 }
 
 #fre-asked-ques-head {
-	flex-grow: 10;
-	border-radius: 0 0 0 0;
 	border-radius: var(--round) var(--round) 0 0;
 }
 
 #fre-asked-ques {
-	border-radius: 0 0 0 0;
 	gap: var(--spacing);
-	border-radius: var(--round) var(--round) 0 0;
 }
 
 #questions {
-	align-items: flex-start;
+	align-items: stretch;
 	flex-direction: row;
+	gap: var(--spacing);
+}
+
+.questions {
+	flex: 1 1;
+	border-radius: 0 0 var(--round) var(--round);
 }

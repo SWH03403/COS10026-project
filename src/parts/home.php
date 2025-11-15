@@ -32,18 +32,25 @@
 	</section>
 
 	<section id="questions" class="fill flex">
-		<article id = "ques-1" class="box">
-			<h3>How do I create an account? a</h3>
+		<article id = "ques-1" class="questions box">
+			<h3>How do I create a profile?</h3>
 			<p>
-				To create an account, click on the "Signup" button on the homepage and fill out the registration form with your details.
+				To create an profile, click "Profile" and fill out the registration form with your details.
 			</p>
 		</article>
-		<article id = "ques-2" class="box">
-			<h3>How do I create an account?</h3>
+		<article id = "ques-2" class="questions box">
+			<h3>How do I apply for jobs?</h3>
 			<p>
-				To create an account, click on the "Signup" button on the homepage and fill out the registration form with your details.
+				To apply for jobs, create an account by signing up and create your profile.
 			</p>
 		</article>
+		<article id = "ques-3" class="questions box">
+			<h3>Where can i find listed jobs?</h3>
+			<p>
+				Navigate to the "Jobs" section to browse available job listings.
+			</p>
+		</article>
+		
 	</section>
 
 	
