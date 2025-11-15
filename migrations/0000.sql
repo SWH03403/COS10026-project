@@ -19,7 +19,7 @@ CREATE TABLE user_applicant (
 	last_name TEXT NOT NULL,
 	dob DATE NOT NULL,
 	gender TEXT NOT NULL
-		CHECK(gender IN ('m', 'f', '?')),
+		CHECK(gender IN ('m', 'f', 'x', '?')),
 
 	can_check_background BOOLEAN NOT NULL,
 	is_convict BOOLEAN NOT NULL,
