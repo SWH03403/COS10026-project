@@ -39,7 +39,7 @@
 		]);
 		render('input/binary', ['Have you ever been convicted of a felony?', 'felony']);
 		render('input/binary', ['Are you a veteran?', 'veteran']);
-		render('csrf');
+		render('input/csrf');
 	?>
 	<button type="submit">Submit</button>
 </form>
