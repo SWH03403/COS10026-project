@@ -97,6 +97,13 @@ form.box {
 	gap: 5px;
 	background-color: white;
 
+	h2 {
+		margin-bottom: 5px;
+		line-height: 1.2em;
+		text-align: center;
+	}
+	h2:not(:first-child) { margin-top: 20px; }
+
 	/* Highlight (by inverting colors of) the label when its corresponding input is focused. */
 	> *:has(:focus) label {
 		border-bottom: var(--form-border-active);

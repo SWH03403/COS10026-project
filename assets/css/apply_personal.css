@@ -1,5 +1,15 @@
 @import "global.css";
 
+main {
+	gap: 50px;
+
+	p {
+		width: 700px;
+		max-width: 100%;
+		text-align: center;
+	}
+}
+
 #personal-info {
 	width: 400px;
 	max-width: 100%;

@@ -1,3 +1,4 @@
+<?php function head(string $text) { echo "<h2>$text</h2>"; } ?>
 <section class="flex-y flex-o">
 	<h1>Personal Info Submission</h1>
 	<p>
@@ -8,6 +9,7 @@
 </section>
 <form id="personal-info" class="box flex-y" method="post">
 	<?php
+		head('Identity');
 		render('input', ['First Name', 'first-name']);
 		render('input', ['Last Name', 'last-name']);
 		render('input', ['Date of Birth', 'dob', 'date', 'persist' => true]);
@@ -17,6 +19,17 @@
 			'x' => 'Non-binary (they/them)',
 			'?' => 'Prefer not to say',
 		]]);
+
+		head('Address');
+		render('input', ['Street', 'street']);
+		render('input', ['Town', 'town']);
+		render('input', ['State', 'state']);
+		render('input', ['Postcode', 'postcode']);
+
+		head('Contact');
+		render('input', ['Phone No.', 'phone']);
+
+		head('Questions');
 		render('input/binary', [
 			'Are you willing to submit to a background check if selected for employment?',
 			'background',

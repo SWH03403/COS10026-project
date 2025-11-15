@@ -1,15 +1,6 @@
 @import "global.css";
 
-main {
-	gap: 50px;
-
-	h2 {
-		margin-bottom: 5px;
-		line-height: 1.2em;
-		text-align: center;
-	}
-	h2:not(:first-child) { margin-top: 20px; }
-}
+main { gap: 50px; }
 
 #application-form { width: 400px; }
 
