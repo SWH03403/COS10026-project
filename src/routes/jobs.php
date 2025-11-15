@@ -24,8 +24,17 @@ foreach ($cates as $section) {
 }
 $sections = array_merge($sections, $empties);
 
-render_page(fn() => render('listing'),
+render_page(function() use ($sections) {
+	echo '<aside id="category-navigation" class="flex-y box"><ul>';
+	foreach ($sections as $section) {
+		$empty = empty($section['entries'])? ' class="empty"' : "";
+		echo "<li$empty><a href=\"#{$section['id']}\">{$section['name']}</a></li>";
+	}
+	echo '</ul><p class="minor">Click on a job listing to expand/collapse its details</p></aside>';
+	echo '<div id="listing-categories" class="fill flex-y">';
+	foreach ($sections as $section) { render('jobs/section', $section); }
+	echo '</div>';
+},
 	title: 'Jobs Listing',
 	style: 'listing',
-	sections: $sections,
 );
