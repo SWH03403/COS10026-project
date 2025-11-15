@@ -69,8 +69,52 @@ if (Request::is_post()) {
 }
 end_post:
 
-render_page('forms/applicant',
+function render_header(string $text) { echo "<h2>$text</h2>"; }
+
+render_page(function() use ($errors) {
+	echo <<<'TEXT'
+	<section class="flex-y flex-o">
+		<h1>Personal Info Submission</h1>
+		<p>
+			Before submitting EOIs, you must first provide some information about yourself,
+			which will be reflected on <span class="important">all</span> of your future EOIs.
+		</p>
+		<p>You can always update these data in the <span class="important">Profile</span> page.</p>
+	</section>
+	TEXT;
+	render('errors', $errors);
+	echo '<form id="personal-info" class="box flex-y" method="post">';
+	render_header('Identity');
+	render('input', ['First Name', 'first-name']);
+	render('input', ['Last Name', 'last-name']);
+	render('input', ['Date of Birth', 'dob', 'date', 'persist' => true]);
+	render('input/select', ['Gender', 'gender', [
+		'm' => 'Male (he/him)',
+		'f' => 'Female (she/her)',
+		'x' => 'Non-binary (they/them)',
+		'?' => 'Prefer not to say',
+	]]);
+
+	render_header('Address');
+	render('input', ['Street', 'street']);
+	render('input', ['Town', 'town']);
+	render('input/select', ['State', 'state', State::options()]);
+	render('input', ['Postcode', 'postcode', 'number']);
+
+	render_header('Contact');
+	render('input', ['Phone No.', 'phone']);
+
+	render_header('Questions');
+	render('input/binary', [
+		'Are you willing to submit to a background check if selected for employment?',
+		'background',
+	]);
+	render('input/binary', ['Have you ever been convicted of a felony?', 'felony']);
+	render('input/binary', ['Are you a veteran?', 'veteran']);
+	render('input/csrf');
+
+	echo '<button type="submit">Submit</button></form>';
+},
 	title: 'Applicant Personal Info',
 	style: 'apply_personal',
-	errors: $errors,
 );
