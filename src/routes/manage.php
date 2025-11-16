@@ -15,6 +15,8 @@ foreach ($db->query('SELECT * FROM eoi') as $row) {
 //exit;
 
 $search = $_GET['search'] ?? '';
+$delete = $_GET['delete'] ?? '';
+
 $searchTags = [
     'job:' => 'job_id', 
     'user_id:'  => 'user_id', 
@@ -24,22 +26,37 @@ $searchTags = [
 
 render_page(function() use ($infos, $search, $searchTags) {
 	echo 
-    '<aside id="tools-bar" class="flex-y box"><ul>
-        <form method="GET" action="">
-            <label>Search: </label>
-            <br>
-            <input type="text" name="search" placeholder="user_name: Bob...">
-            <input type="submit" value="search">
-        </form>
+    '
+    <section id="tool-box" class="flex flex-y">
+        <aside id="search-bar" class="flex-y box"><ul>
+            <form method="GET" action="">
+                <label>Search: </label>
+                <br>
+                <input type="text" name="search" placeholder="user_name: Bob...">
+                <input type="Submit" value="Search">
+            </form>
+        </aside>
 
-        <p>Search guide: </p>
-        <ul>
-            <li>Use tag "job:" to filter for jobs ("job: VKE99, ZBA91;") </li>
-            <li>Use tag "user_id:" to filter specific applicant id ("user_id: 24125;")</li>
-            <li>Use tag "first_name:" to filter specific first name ("first_name: Bob, Jake;")</li>
-            <li>Other tags: last_name, user_name (find full name)</li>
-        </ul>
-    </aside>
+        <aside id="delete-bar" class="flex-y box"><ul>
+            <form method="GET" action="">
+                <label>Delete: </label>
+                <br>
+                <input type="text" name="search" placeholder="user_name: Bob...">
+                <input type="Submit" value="Delete">
+            </form>            
+        </aside>
+
+        <aside id="guide-bar" class="flex-y box">
+            <p>Tag guide: </p>
+            <ul>
+                <li>Use tag "job:" to filter for jobs ("job: VKE99, ZBA91;") </li>
+                <li>Use tag "user_id:" to filter specific applicant id ("user_id: 24125;")</li>
+                <li>Use tag "first_name:" to filter specific first name ("first_name: Bob, Jake;")</li>
+                <li>Other tags: last_name, user_name (find full name)</li>
+            </ul>
+        </aside>
+    </section>
+    
 
     <div id="listing-eois" class="fill flex-y box">';
     if ($search) {
@@ -61,32 +78,18 @@ render_page(function() use ($infos, $search, $searchTags) {
                 }
             }
         }
-
-        // foreach ($terms as $term) {
-        //     $term = trim($term);
-        //     if (str_starts_with($term, 'job:')) {
-        //         $job_ids = array_map('trim', explode(',', substr($term, 4)));
-        //         $filtered = array_filter($filtered, function($info) use ($job_ids) {
-        //             return in_array($info['job_id'], $job_ids);
-        //         });
-        //     } elseif (str_starts_with($term, 'user_id:')) {
-        //         $user_ids = array_map('trim', explode(',', substr($term, 8)));
-        //         $filtered = array_filter($filtered, function($info) use ($user_ids) {
-        //             return in_array($info['user_id'], $user_ids);
-        //         });
-        //     } elseif (str_starts_with($term, 'user_id:')) {
-        //         $user_ids = array_map('trim', explode(',', substr($term, 8)));
-        //         $filtered = array_filter($filtered, function($info) use ($user_ids) {
-        //             return in_array($info['user_id'], $user_ids);
-        //         });
-        //     } 
-        // }
         foreach ($filtered as $info) { render('eoi/eoi_info', $info); }
     } else {
         foreach ($infos as $info) { render('eoi/eoi_info', $info); }
     }
 
     echo '</div>';
+
+    /////////////////////////////////// Delete with tags
+
+
+    
+
 	
 },
 	title: 'Management',
