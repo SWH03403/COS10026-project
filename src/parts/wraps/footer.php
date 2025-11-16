@@ -1,9 +1,8 @@
 <?php
 $external_routes = [
-	'https://dueordie.atlassian.net/jira/software/projects/WEBTECHPRJ/summary'
-		=> 'Project Management',
-	'https://github.com/SWH03303/swh03303.github.io' => 'Github Repo',
-	'mailto:info@duoordxe.com.au' => 'Contact us',
+	'https://dueordie.atlassian.net/jira/software/projects/WEBTECHPRJ/summary' => 'Jira',
+	'https://github.com/SWH03303/swh03303.github.io' => 'Github',
+	'mailto:feedbacks@thissitedoesnotexist.au' => 'Email',
 ]; ?>
 <footer class="flex flex-o">
 	<nav id="external-navigation" class="fill flex">
