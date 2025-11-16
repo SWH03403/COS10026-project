@@ -42,7 +42,8 @@ class Session {
 	public static function require_no_user() {
 		if (self::has_User()) { Router::return(); }
 	}
-	public static function require_user() {
+	public static function require_user(bool $manager = false) {
 		if (!self::has_user()) { Router::redirect('user/login'); }
+		if ($manager && !self::user()->account()->is_manager) { Catcher::forbidden(); }
 	}
 }
