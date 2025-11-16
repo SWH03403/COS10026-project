@@ -8,9 +8,13 @@ if (Request::is_post()) {
 
 	if (!Csrf::check()) { $errors[] = 'Invalid CSRF token'; }
 	if (strlen($email) > 30) { $errors[] = 'Email is too long'; }
+	if (User::is_locked($email)) { $errors[] = 'Account is locked'; }
 	if (!empty($errors)) { goto end_post; }
 
-	if (is_null(User::login($email, $pass))) { $errors[] = 'Invalid credentials'; }
+	if (is_null(User::login($email, $pass))) {
+		$errors[] = 'Invalid credentials';
+		User::inc_lock($email);
+	}
 	else { Router::return(); }
 }
 end_post:
