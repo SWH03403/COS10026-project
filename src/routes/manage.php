@@ -28,20 +28,24 @@ render_page(function() use ($infos, $search, $searchTags) {
 	echo 
     '
     <section id="tool-box" class="flex flex-y">
-        <aside id="search-bar" class="flex-y box"><ul>
-            <form method="GET" action="">
-                <label>Search: </label>
-                <br>
-                <input type="text" name="search" placeholder="user_name: Bob...">
+        <aside id="search-bar" class="flex-y box">
+            <form method="GET" action=""
+                <label>Search: </label><br>
+                <input type="text" 
+                name="search" 
+                placeholder="user_name: Bob..." value="' . html_sanitize($search) . '"
+            >
+
                 <input type="Submit" value="Search">
             </form>
         </aside>
 
-        <aside id="delete-bar" class="flex-y box"><ul>
+        <aside id="delete-bar" class="flex-y box">
             <form method="GET" action="">
-                <label>Delete: </label>
-                <br>
-                <input type="text" name="search" placeholder="user_name: Bob...">
+                <label>Delete: </label><br>
+                <input type="text" name="delete" placeholder="user_name: Bob..."
+                value=""
+                >
                 <input type="Submit" value="Delete">
             </form>            
         </aside>
@@ -84,12 +88,6 @@ render_page(function() use ($infos, $search, $searchTags) {
     }
 
     echo '</div>';
-
-    /////////////////////////////////// Delete with tags
-
-
-    
-
 	
 },
 	title: 'Management',
