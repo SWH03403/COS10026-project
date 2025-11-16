@@ -5,7 +5,6 @@ body {
 	background-image: url("/static/images/background.png");
 	background-attachment: scroll;
 	background-color: #000;
-	background-position: center 0;
 	background-size: 500px;
 }
 
