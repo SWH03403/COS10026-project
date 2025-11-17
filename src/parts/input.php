@@ -7,6 +7,7 @@ $default = $D['default'] ?? null;
 $required = $D['required'] ?? true;
 $placeholder = $D['placeholder'] ?? null;
 $vert = $D['vertical'] ?? false;
+$suffix = $D['suffix'] ?? null;
 
 $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? $default : $value;
@@ -19,9 +20,10 @@ $required = $required? ' required' : '';
 $placeholder = is_null($placeholder)? '' : " placeholder=\"$placeholder\"";
 
 echo <<<TEXT
-	<div class="flex$vert">
-		<label for="$id">$label</label>
-		<input id="$id" class="fill" type="$type" name="$name"$value$placeholder$required$focus>
-	</div>
+<div class="flex$vert">
+	<label for="$id">$label</label>
+	<input id="$id" class="fill" type="$type" name="$name"$value$placeholder$required$focus>
 TEXT;
+if (!is_null($suffix)) { echo "<span class=\"suffix flex-y flex-o\">$suffix</span>"; }
 ?>
+</div>

@@ -27,10 +27,11 @@ render_page(function() use (&$job, &$errors) {
 	echo '<form id="application-form" class="flex-y box" action="formtest.php" method="post" enctype="multipart/form-data">';
 
 	$salary_range = $job->salary->min	. ' ~ ' . $job->salary->max;
+	$salary_cur = $job->salary->currency . ' / year';
 	$exp_range = $job->experience->begin . ' ~ ' . $job->experience->end;
 	$start_date_msg = 'When are you available to start in case you are selected for employment?';
-	render('input', 'Desired Salary', placeholder: $salary_range);
-	render('input', 'Experience', placeholder: $exp_range);
+	render('input', 'Desired Salary', placeholder: $salary_range, suffix: $salary_cur);
+	render('input', 'Experience', placeholder: $exp_range, suffix: 'years');
 	render('input', $start_date_msg, 'start-date', type: 'date', vertical: true);
 	render('input/radio', 'Time', options: [
 		'full' => 'Full-time',

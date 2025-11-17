@@ -173,6 +173,13 @@ form .input-vert > input {
 }
 form > button[type="submit"] { margin-top: 20px; }
 
+/* Text input suffix */
+input + .suffix {
+	border-bottom: var(--form-border);
+	font-weight: 600;
+}
+input:focus + .suffix { border-bottom: var(--form-border-active); }
+
 /* Styling for Yes/No questions. */
 .input-yesno {
 	align-items: center;
