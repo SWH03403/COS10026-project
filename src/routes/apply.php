@@ -20,15 +20,17 @@ render_page(function() use (&$job, &$errors) {
 	<div class="flex-y">
 	<section id="application-header" class="flex-y flex-o">
 		<h1>Application Submission</h1>
-		<p>To apply for a job, please fill the following form.<p>
+		<p>To apply for your selected job, please fill the following form.<p>
 	</section>
 	TEXT;
 	render('errors', $errors);
 	echo '<form id="application-form" class="flex-y box" action="formtest.php" method="post" enctype="multipart/form-data">';
 
+	$salary_range = $job->salary->min	. ' ~ ' . $job->salary->max;
+	$exp_range = $job->experience->begin . ' ~ ' . $job->experience->end;
 	$start_date_msg = 'When are you available to start in case you are selected for employment?';
-
-	render('input', 'Desired Salary');
+	render('input', 'Desired Salary', placeholder: $salary_range);
+	render('input', 'Experience', placeholder: $exp_range);
 	render('input', $start_date_msg, 'start-date', type: 'date', vertical: true);
 	render('input/radio', 'Time', options: [
 		'full' => 'Full-time',
