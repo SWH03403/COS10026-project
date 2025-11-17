@@ -13,13 +13,19 @@ foreach ($db->query('SELECT * FROM eoi') as $row) {
 
 $delete = $_GET['delete'] ?? '';
 $confirm_delete = $_POST['confirm_delete'] ?? '';
-$status_change = $_GET['status_change'] ?? '';
-$confirm_change = $_POST['confirm_change'] ?? '';
+
+
 $accpeted_statuses = ['New', 'Current', 'Final'];
 
 
 render_page(function() use ($infos) {
-	$search = $_GET['search'] ?? '';
+	$status_change = $_GET['status_change'] ?? '';
+    $status_change_to = $_GET['status_change_to'] ?? '';
+    $confirm_change = $_POST['confirm_change'] ?? '';
+
+    //var_dump($status_change, $status_change_to, $confirm_change);
+    
+
     $searchTags = [
         'job_id:' => 'job_id', 
         'user_id:'  => 'user_id', 
@@ -33,19 +39,25 @@ render_page(function() use ($infos) {
     <section class="flex flex-y">
         <div id="tool-box" class = "flex flex-o">
             <aside id="search-bar" class="flex-y box">
+                
                 <form method="GET" action=""
-                    <label>Search: </label><br>
+                    <label>Change status: </label><br>
                     <input type="text" 
-                    name="search" 
-                    placeholder="user_name: Bob..." value="' . html_sanitize($search) . '"
+                    name="status_change" 
+                    placeholder="user_name: Bob..." value="' . html_sanitize($status_change) . '"
                 >
 
-                    <input type="Submit" value="Search">
+                    <select name="status_change_to">
+                        <option value="New">New</option>
+                        <option value="Current">Current</option>
+                        <option value="Final">Final</option>
+                    </select>
+                    <input type="Submit" value="Change status">
                 </form>
 
                 <h3>Other tools:</h3>
+                <button onclick="window.location.href=\'/manage\'">Search</button>
                 <button onclick="window.location.href=\'/manager/delete\'">Delete</button>
-                <button onclick="window.location.href=\'/manager/delete\'">Changing status</button>
             </aside>
 
             <aside id="guide-bar" class="flex-y box">
@@ -61,8 +73,15 @@ render_page(function() use ($infos) {
 
         <div id="listing-eois" class="fill flex-y box">' ;
 
-    if ($search) {
-        $terms = explode(';', $search);
+    if ($status_change) {
+        echo '
+            <form method="POST" action="">
+                <label>Are you sure you want to change these eois to "' . $status_change_to . '"?</label>
+                <input type="Submit" name="confirm_change" value="Confirm Change">
+            </form>
+            ';
+
+        $terms = explode(';', $status_change);
 
         $filtered = $infos;
 
@@ -91,11 +110,23 @@ render_page(function() use ($infos) {
 
             
         }
+        
         foreach ($filtered as $info) { 
+
+            if ($status_change && $status_change_to && $confirm_change) {
+                $db = Database::get();
+                $db->query('UPDATE eoi SET status = ? WHERE id = ?', [$status_change_to, $info['id']]);
+                $info['status'] = $status_change_to;
+            } 
+
+            
             render('eoi/eoi_info', $info); 
         }
     } else {
-        foreach ($infos as $info) { render('eoi/eoi_info', $info); }
+        
+        foreach ($infos as $info) { 
+            render('eoi/eoi_info', $info); 
+        }
     }
 
     echo '

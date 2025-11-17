@@ -47,7 +47,7 @@ render_page(function() use ($infos) {
 
                 <h3>Other tools:</h3>
                 <button onclick="window.location.href=\'/manage\'">Search</button>
-                <button onclick="window.location.href=\'/manager/delete\'">Changing status</button>
+                <button onclick="window.location.href=\'/manager/changestatus\'">Change status</button>
             </aside>
 
             <aside id="guide-bar" class="flex-y box">
@@ -105,7 +105,6 @@ render_page(function() use ($infos) {
             if ($delete && $confirm_delete) {
                 $db = Database::get();
                 $db->query('DELETE FROM eoi WHERE id = ?', [$info['id']]);
-                continue;
             } 
             render('eoi/eoi_info', $info); 
         }

@@ -37,7 +37,7 @@ render_page(function() use ($infos) {
 
                 <h3>Other tools:</h3>
                 <button onclick="window.location.href=\'/manager/delete\'">Delete</button>
-                <button onclick="window.location.href=\'/manager/delete\'">Changing status</button>
+                <button onclick="window.location.href=\'/manager/changestatus\'">Change status</button>
             </aside>
 
             <aside id="guide-bar" class="flex-y box">
