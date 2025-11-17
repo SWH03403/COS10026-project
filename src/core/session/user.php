@@ -2,6 +2,8 @@
 class User {
 	private const KEY = 'user';
 	private const KEY_INFO = 'user_account';
+	private const LOCK_THRESHOLD = 3;
+	private const LOCK_DURATION = '10 minutes';
 
 	private function __construct (private string $email) {}
 
@@ -27,6 +29,7 @@ class User {
 	public static function login(string $email, #[SensitiveParameter] string $pass): ?self {
 		$user = new self($email); // could be non-existent
 		if (!$user->authenticate($pass)) { return null; }
+		self::reset_lock($email);
 		Session::force_new(); // remove userless session
 		Session::set(self::KEY, $user->email);
 		return $user;
@@ -48,4 +51,27 @@ class User {
  	}
 	public function applicant(): ?Applicant { return Applicant::_from_user($this); }
 	public function clear_account_cache() { Session::pop(self::KEY_INFO); }
+
+	public static function reset_lock(string $email): void {
+		$db = Database::get();
+		$db->query('DELETE FROM user_lock WHERE email = ?', [$email]);
+	}
+	public static function is_locked(string $email): bool {
+		$db = Database::get();
+		$row = $db->query('SELECT * FROM user_lock WHERE email = ?', [$email])[0] ?? [];
+		if (!isset($row['total'])) { return false; }
+		if ($row['total'] < self::LOCK_THRESHOLD) { return false; }
+		$last = new DateTimeImmutable($row['last'], new DateTimeZone('UTC'));
+		$until = $last->modify('+' . self::LOCK_DURATION);
+		$now = new DateTimeImmutable();
+		if ($until >= $now) { return true; }
+		self::reset_lock($email);
+		return false;
+	}
+	public static function inc_lock(string $email): void {
+		$db = Database::get();
+		$row = $db->query('SELECT * FROM user_lock WHERE email = ?', [$email])[0] ?? [];
+		$total = ($row['total'] ?? 0) + 1;
+		$db->query('INSERT OR REPLACE INTO user_lock(email, total) VALUES (?, ?)', [$email, $total]);
+	}
 }

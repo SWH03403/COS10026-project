@@ -1,3 +1,4 @@
+<?php function r() { return random_int(0, 500); } ?>
 <!DOCTYPE html>
 <html lang="en">
 <head class="flex-y">
@@ -6,6 +7,7 @@
 	<title><?= $D['full_title'] ?? ("SpJ - " . ($D['title'] ?? 'Untitled')) ?></title>
 	<link rel="icon" type="image/png" href="/static/images/favicon.png">
 	<link rel="stylesheet" href="/static/css/<?= $D['style'] ?? 'global' ?>.css">
+	<style>body { background-position: <?= r() ?>px <?= r() ?>px; }</style>
 </head>
 <body class="flex-y">
 <?php render('wraps/header') ?>

@@ -37,18 +37,7 @@ main { gap: 50px; }
 	/* Hide but not disable the underlying radio inputs */
 	input { padding: 0; max-width: 0; }
 }
-
-/* Draw border around the whole input in column sections */
-#application-form input[type="file"],
-#form-start-date {
-	border: var(--form-border);
-	border-radius: 0 0 1em 1em; /* Round bottom */
-}
-/* Highlight border when input is focused */
-#application-form input[type="file"]:focus,
-#form-start-date:has(input:focus) { border: var(--form-border-active); }
 /* Reduce boldness */
 label[for="input-documents"],
 label[for="input-start"] { font-weight: 500; }
 #input-start { border: none; }
-

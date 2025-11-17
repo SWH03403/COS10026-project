@@ -19,6 +19,7 @@ class Catcher {
 	}
 
 	public static function not_modified(): never { self::code(304); }
+	public static function forbidden(): never { self::code(403, 'Forbidden'); }
 	public static function not_found(): never { self::code(404, 'Not Found'); }
 	public static function internal_error(): never { self::code(500, 'Internal Server Error'); }
 }

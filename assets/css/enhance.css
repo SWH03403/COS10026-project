@@ -1,0 +1,8 @@
+@import "global.css";
+
+#enhancements-list {
+	--round: 2em;
+
+	width: 1200px;
+	max-width: 100%;
+}
