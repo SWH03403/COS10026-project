@@ -2,8 +2,11 @@
 Session::require_user();
 if (is_null(Session::user()->applicant())) { Router::redirect('apply/edit'); }
 
+function to_list(string $type): never { Router::redirect('jobs?msg=' . $type); }
 $job_id = Request::param('id');
-if (is_null($job_id)) { Router::redirect('jobs?msg=choose_first'); }
+if (is_null($job_id)) { to_list('choose_first'); }
+$job = Job::get($job_id);
+if (is_null($job)) { to_list('invalid'); }
 
 $errors = [];
 if (Request::is_post()) {

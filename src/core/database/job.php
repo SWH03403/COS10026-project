@@ -5,6 +5,13 @@ class JobCategory {
 		public string $name,
 	) {}
 
+	public static function get(int $id): ?self {
+		$db = Database::get();
+		$row = $db->query('SELECT * FROM job_category WHERE id = ?', [$id])[0] ?? null;
+		if (is_null($row)) { return null; }
+		return new self($row['id'], $row['name']);
+	}
+
 	public static function all(): array {
 		$db = Database::get();
 		foreach ($db->query('SELECT * FROM job_category') as $row) {
@@ -42,6 +49,27 @@ class Job {
 		public DateTimeImmutable $created,
 		public DateTimeImmutable $updated,
 	) {}
+
+	public static function get(string $id): ?self {
+		$db = Database::get();
+		$row = $db->query('SELECT * FROM job WHERE id = ?', [$id])[0] ?? null;
+		if (is_null($row)) { return null; }
+		extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
+		return new self(
+			$id,
+			JobCategory::get($category_id),
+			$company,
+			$superior,
+			$name,
+			$location,
+			new JobSalary($salary_min, $salary_max, $salary_currency),
+			$description,
+			new Range($exp_min, $exp_max),
+			new JobRequirement(),
+			new DateTimeImmutable($created, new DateTimeZone('UTC')),
+			new DateTimeImmutable($updated, new DateTimeZone('UTC')),
+		);
+	}
 
 	public static function all(): array {
 		$mapped_categories = [];
