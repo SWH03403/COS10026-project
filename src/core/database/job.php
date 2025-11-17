@@ -55,7 +55,7 @@ class Job {
 		$row = $db->query('SELECT * FROM job WHERE id = ?', [$id])[0] ?? null;
 		if (is_null($row)) { return null; }
 		extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
-		return new self(
+		$item = new self(
 			$id,
 			JobCategory::get($category_id),
 			$company,
@@ -69,6 +69,12 @@ class Job {
 			new DateTimeImmutable($created, new DateTimeZone('UTC')),
 			new DateTimeImmutable($updated, new DateTimeZone('UTC')),
 		);
+		foreach ($db->query('SELECT * FROM job_requirement WHERE id = ?', [$id]) as $row) {
+			extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
+			if (str_starts_with($row['name'], 'opt-')) { $item->reqs->opts[] = $value; }
+			else { $item->reqs->must[$name] = $value; }
+		}
+		return $item;
 	}
 
 	public static function all(): array {
