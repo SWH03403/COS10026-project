@@ -6,18 +6,20 @@ $persist = $D['persist'] ?? ($type !== 'password');
 $default = $D['default'] ?? null;
 $required = $D['required'] ?? true;
 $placeholder = $D['placeholder'] ?? null;
+$vert = $D['vertical'] ?? false;
 
 $value = (Request::is_post() && $persist)? Request::param($name) : null;
 $value = is_null($value)? $default : $value;
 $value = is_null($value)? '' : ' value="' . html_sanitize($value) . '"';
 
 [$first, $id] = input_id();
+$vert = $vert? '-y input-vert' : '';
 $focus = $first? ' autofocus' : '';
 $required = $required? ' required' : '';
 $placeholder = is_null($placeholder)? '' : " placeholder=\"$placeholder\"";
 
 echo <<<TEXT
-	<div class="flex">
+	<div class="flex$vert">
 		<label for="$id">$label</label>
 		<input id="$id" class="fill" type="$type" name="$name"$value$placeholder$required$focus>
 	</div>

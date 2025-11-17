@@ -163,6 +163,14 @@ button[type="submit"] {
 
 	&:hover { background-color: #333; }
 }
+/* Draw border around the whole input in column sections */
+form .input-vert > input {
+	border: var(--form-border);
+	border-radius: 0 0 1em 1em; /* Round bottom */
+	text-align: center;
+	/* Highlight border when input is focused */
+	&:focus { border: var(--form-border-active); }
+}
 form > button[type="submit"] { margin-top: 20px; }
 
 /* Styling for Yes/No questions. */
