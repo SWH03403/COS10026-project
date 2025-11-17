@@ -100,7 +100,7 @@ render_page(function() use ($errors) {
 	render_header('Address');
 	render('input', 'Street', default: $info?->street);
 	render('input', 'Town', default: $info?->town);
-	render('input/select', 'State', default: $info?->state, options: State::options());
+	render('input/select', 'State', default: $info?->state->abbr(), options: State::options());
 	render('input', 'Postcode', type: 'number', default: $info?->postcode);
 
 	render_header('Contact');

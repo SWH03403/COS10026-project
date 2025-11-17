@@ -16,8 +16,9 @@ echo "<label>$label</label>";
 $idx = 1;
 foreach ($options as $value => $label) {
 	$child_id = $id . "-$idx";
+	$selected = ($checked === $value)? ' checked' : '';
 	echo <<<TEXT
-	<input id="$child_id" type="radio" name="$name" value="$value" required>
+	<input id="$child_id" type="radio" name="$name" value="$value"$selected$required>
 	<label for="$child_id" class="fill">$label</label>
 	TEXT;
 	$idx += 1;
