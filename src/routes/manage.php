@@ -1,4 +1,6 @@
 <?php
+Session::require_user(true);
+
 $db = Database::get();
 $infos = [];
 
