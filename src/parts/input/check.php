@@ -13,7 +13,7 @@ $required = $required? ' required' : '';
 $checked = $checked? ' checked' : '';
 
 echo <<<TEXT
-<div class="flex">
+<div class="flex input-check">
 	<input id="$id" type="checkbox" name="$name"$checked$required>
 	<label for="$id" class="fill">$label</label>
 </div>

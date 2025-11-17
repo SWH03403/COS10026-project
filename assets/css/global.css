@@ -148,7 +148,8 @@ input[type="file"] {
 	/* Hide the "Browse..." button */
 	&::file-selector-button { display: none; }
 }
-/* Hide the default radio */
+/* Hide the default checkbox/radio symbol */
+input[type="checkbox"],
 input[type="radio"] { appearance: none; }
 
 /* Form submission button */
@@ -212,6 +213,32 @@ input:focus + .suffix { border-bottom: var(--form-border-active); }
 	/* Pseudo texts to avoid repeating in HTML */
 	input[value="true"]::before { content: "Yes"; }
 	input[value="false"]::before { content: "No"; }
+}
+
+/* Styling for Check fields */
+.input-check {
+	label { border-radius: 0 1em 1em 0; }
+	input {
+		min-width: 30px;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: var(--form-border);
+		border-radius: 1em 0 0 1em;
+	}
+	input:active, input:focus, input:checked { border: var(--form-border-active); }
+	input:checked {
+		background-color: black;
+		color: white;
+
+		&::before {
+			content: "✓";
+			font-size: 20pt;
+			line-height: 1em;
+			padding-bottom: 3px;
+		}
+	}
 }
 
 /* Common flex attribute, `flex` is aliased to `flex-x` */
