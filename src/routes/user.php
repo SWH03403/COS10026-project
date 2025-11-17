@@ -10,13 +10,16 @@ render_page(function() use ($user) {
 	$display = html_sanitize($account->display);
 	echo "<h1>Hi, $display</h1>";
 
-	render('boxlink', function() use (&$account) {
+	render('boxlink', function() use (&$account, &$applicant) {
 		$row = fn($key, $val) => "<span>$key:</span><span>$val</span>";
 		echo '<div id="account-info">';
 		echo $row('Email', html_sanitize($account->email));
 		echo $row('Created', $account->created->format(DATETIME_FORMAT));
 		echo $row('Updated', $account->updated->format(DATETIME_FORMAT));
 		echo $row('Is manager', $account->is_manager? 'Yes' : 'No');
+		if (!is_null($applicant)) {
+			echo $row('EOIs', $account->applications_count());
+		}
 		echo '</div>';
 	}, 'Account Info', '/user/edit', 'Edit', id: 'account-container');
 	render('profile', $applicant);
