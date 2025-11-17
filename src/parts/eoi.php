@@ -35,4 +35,28 @@ $addr = implode(', ', [$D['street'], $D['town'], $D['state'], $D['postcode']]);
 	<p class="job-name"><?= $D['name'] ?></p>
 	<p class="job-company"><?= html_sanitize($D['company']) ?></p>
 	<p class="job-location"><?= html_sanitize($D['location']) ?></p>
+
+	<hr><div class="flex-y">
+		<form method="post">
+			<?php
+			render('input/hidden', 'mode', 'delete');
+			render('input/hidden', 'eoi_id', $D['id']);
+			render('input/csrf');
+			render('input/submit', 'Deleted');
+			?>
+		</form>
+		<form method="post" class="flex">
+			<?php
+			render('input/hidden', 'mode', 'edit');
+			render('input/hidden', 'eoi_id', $D['id']);
+			render('input/select', 'Status', default: $D['status'], options: [
+				'New' => 'New',
+				'Current' => 'Current',
+				'Final' => 'Final',
+			]);
+			render('input/csrf');
+			render('input/submit', 'Update');
+			?>
+		</form>
+	</div>
 </details>
