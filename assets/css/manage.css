@@ -55,7 +55,11 @@ details.eoi-entry {
 }
 
 .eoi-salary::before { content: "Desired Salary:"; }
-.eoi-salary::after { content: " / years"; }
+.eoi-salary::after { content: "/ years"; }
+.eoi-experience::before { content: "Experience:"; }
+.eoi-experience::after { content: "years"; }
+.eoi-time::before { content: "Time Plan:"; }
+.eoi-status::before { content: "Status:"; }
 
 .applicant-dob::before { content: "Date of Birth:"; }
 .applicant-gender::before { content: "Gender:"; }

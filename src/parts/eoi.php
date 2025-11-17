@@ -1,6 +1,11 @@
 <?php
 $D = $D[0];
 $salary = $D['desired_salary'] . ' ' . $D['salary_currency'];
+$time = match ($D['timeplan']) {
+	'part' => 'Part-time',
+	'full' => 'Full-time',
+	'temp' => 'Temporary',
+};
 $gender = ucfirst(Gender::from($D['gender'])->label());
 $addr = implode(', ', [$D['street'], $D['town'], $D['state'], $D['postcode']]);
 ?>
@@ -10,8 +15,12 @@ $addr = implode(', ', [$D['street'], $D['town'], $D['state'], $D['postcode']]);
 		<span class="fill"></span>
 		<span class="important"><?= $D['job_id'] ?></span>
 	</summary>
+
 	<hr><h2>Entry Info</h2>
 	<p class="eoi-salary"><?= $salary ?></p>
+	<p class="eoi-experience">2</p> <!-- FIX: Experience not saved you dumkopf! -->
+	<p class="eoi-time"><?= $time ?></p>
+	<p class="eoi-status"><?= $D['status'] ?></p>
 
 	<hr><h2>Applicant Info</h2>
 	<p class="applicant-dob"><?= $D['dob'] ?></p>
