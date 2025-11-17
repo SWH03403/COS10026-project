@@ -21,21 +21,16 @@
         }
     ?>
 
+    <?php $A = $D['applicant_info']; $A = $A[0]?>
 
-	<div class="flex flex-y eoi-front">
-		<p>Applicant ID: <?= $D['user_id'] ?></p>
-		<p>Job ID: <?= $D['job_id'] ?></p>
-		<p>Status: <?= $D['status'] ?></p>
-		<p>Desired Salary: <?= $D['desired_salary'] ?></p>
-		<p>Start Date: <?= $D['start_date'] ?></p>
+	<div class="flex eoi-front">
+		<p>[<?= $D['id'] ?>] <?= $A['first_name'] . ' ' . $A['last_name'] ?> || User ID: <?= $D['user_id'] ?> || Job ID: <?= $D['job_id'] ?> || Status: <?= $D['status'] ?> || Desired Salary: <?= $D['desired_salary'] ?> || Start Date: <?= $D['start_date'] ?> </p>
 	</div>
 
     <details class="flex flex-y eoi-details">
         <!-- <summary></summary> -->
         <h2>Applicant profile</h2>
         <hr>
-        
-        <?php $A = $D['applicant_info']; $A = $A[0]?>
 
         <p>Name: <?= $A['first_name'] . ' ' . $A['last_name'] ?></p>
         <p>DOB: <?= $A['dob'] ?></p>

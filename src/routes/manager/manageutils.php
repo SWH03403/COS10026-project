@@ -6,9 +6,17 @@ $infos = [];
 
 foreach ($db->query('SELECT * FROM eoi') as $row) {
     $applicant_info = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$row['user_id']]);
-    //$applicant_info[0]['Name'] = $applicant_info[0]['first_name'] . ' ' . $applicant_info[0]['last_name'];
     $infos[] = $row + ['applicant_info' => $applicant_info];
 }
+//exit;
+
+
+$delete = $_GET['delete'] ?? '';
+$confirm_delete = $_POST['confirm_delete'] ?? '';
+$status_change = $_GET['status_change'] ?? '';
+$confirm_change = $_POST['confirm_change'] ?? '';
+$accpeted_statuses = ['New', 'Current', 'Final'];
+
 
 render_page(function() use ($infos) {
 	$search = $_GET['search'] ?? '';
@@ -53,7 +61,6 @@ render_page(function() use ($infos) {
 
         <div id="listing-eois" class="fill flex-y box">' ;
 
-    //search_function($search, ...$searchTags);
     if ($search) {
         $terms = explode(';', $search);
 
@@ -64,6 +71,9 @@ render_page(function() use ($infos) {
                 $term = trim($term);
                 if (str_starts_with($term, $tag)) {
                     $extractedInfo = array_map('trim', explode(',', substr($term, strlen($tag))));
+
+                    
+
                     $filtered = 
                     array_filter($filtered, function($info) use ($extractedInfo, $infoKey) {
                         if (array_key_exists($infoKey, $info)) {
