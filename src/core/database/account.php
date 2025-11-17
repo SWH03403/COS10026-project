@@ -24,4 +24,11 @@ class Account {
 			$mgr,
 		);
 	}
+
+	public function applications_count(): int {
+		$db = Database::get();
+		$row = $db->query('SELECT COUNT(*) FROM eoi WHERE id = ?', [$this->id])[0] ?? [];
+		$count = array_values($row)[0] ?? 0;
+		return $count;
+	}
 }

@@ -1,1 +1,1 @@
-<input type="hidden" name="<?= Csrf::FORM_FIELD ?>" value="<?= Csrf::new() ?>">
+<?php render('input/hidden', Csrf::FORM_FIELD, Csrf::new()) ?>
