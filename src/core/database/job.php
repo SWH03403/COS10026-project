@@ -69,7 +69,7 @@ class Job {
 			new DateTimeImmutable($created, new DateTimeZone('UTC')),
 			new DateTimeImmutable($updated, new DateTimeZone('UTC')),
 		);
-		foreach ($db->query('SELECT * FROM job_requirement WHERE id = ?', [$id]) as $row) {
+		foreach ($db->query('SELECT * FROM job_requirement WHERE id = ? ORDER BY name', [$id]) as $row) {
 			extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
 			if (str_starts_with($row['name'], 'opt-')) { $item->reqs->opts[] = $value; }
 			else { $item->reqs->must[$name] = $value; }
@@ -100,7 +100,7 @@ class Job {
 			$row['requirements'] = $reqs[$row['id']] ?? [];
 			$cates[$row['category_id']]['entries'][] = $row;
 		}
-		foreach ($db->query('SELECT * FROM job_requirement') as $row) {
+		foreach ($db->query('SELECT * FROM job_requirement ORDER BY name') as $row) {
 			extract($row, EXTR_OVERWRITE); // WARN: Extract SQL row
 			if (str_starts_with($row['name'], 'opt-')) { $items[$id]->reqs->opts[] = $value; }
 			else { $items[$id]->reqs->must[$name] = $value; }
