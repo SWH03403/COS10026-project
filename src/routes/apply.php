@@ -13,10 +13,11 @@ if (Request::is_post()) {
 }
 end_post:
 
-render_page(function() use ($errors) {
+render_page(function() use (&$job, &$errors) {
 	$info = Session::user()?->applicant();
 
 	echo <<<'TEXT'
+	<div class="flex-y">
 	<section id="application-header" class="flex-y flex-o">
 		<h1>Application Submission</h1>
 		<p>To apply for a job, please fill the following form.<p>
@@ -40,7 +41,7 @@ render_page(function() use ($errors) {
 	);
 	render('input/submit');
 
-	echo '</form>';
+	echo '</form></div>';
 },
 	title: 'Application Submission',
 	style: 'apply',

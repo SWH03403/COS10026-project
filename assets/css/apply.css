@@ -1,6 +1,6 @@
 @import "global.css";
 
-main { gap: 50px; }
+#application-header { margin-bottom: 50px; }
 
 #application-form { width: 400px; }
 
