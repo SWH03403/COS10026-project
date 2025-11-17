@@ -1,8 +1,28 @@
 <?php
 Session::require_user(true);
 
-$db = Database::get();
-$infos = getAndMergeEOIInfos($db);
+enum Filter: string {
+	case JobId = 'job_id';
+	case FirstName = 'first_name';
+	case LastName = 'last_name';
+	case FullName = 'full_name';
+}
+
+enum Order: string {
+	case Id = 'id';
+	case JobId = 'job_id';
+	case FirstName = 'user_applicant.first_name';
+	case LastName = 'user_applicant.last_name';
+	case Salary = 'desired_salary';
+	case Experience = 'experience';
+	case Start = 'start_date';
+	case Create = 'created';
+	case Update = 'updated';
+}
+
+$query = Request::param('query') ?? '';
+$filter = Filter::tryFrom(Request::param('filter')) ?? Filter::JobId;
+$order = Order::tryFrom(Request::param('order')) ?? Order::Id;
 
 render_page(function() use ($infos) {
 	$search = $_GET['search'] ?? '';
