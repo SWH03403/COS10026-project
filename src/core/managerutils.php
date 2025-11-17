@@ -98,6 +98,18 @@ function search_head_html(string $h2val, $searchBarName, $search, $extra_search,
 }
 
 
+function getAndMergeEOIInfos($db) : array {
+    $infos = [];
+
+    foreach ($db->query('SELECT * FROM eoi') as $row) {
+        $applicant_info = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$row['user_id']]);
+        $infos[] = $row + ['applicant_info' => $applicant_info];
+    }
+
+    return $infos;
+}
+
+
 
 
 

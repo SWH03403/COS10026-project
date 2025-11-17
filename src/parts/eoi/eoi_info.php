@@ -19,6 +19,8 @@
                 $D['status'] = $status_change_individual;
             }
         }
+
+        $J = Job::get($D['job_id']);
     ?>
 
     <?php $A = $D['applicant_info']; $A = $A[0]?>
@@ -29,27 +31,52 @@
 
     <details class="flex flex-y eoi-details">
         <summary></summary>
-        <hr>
+        <br>
         <h2>Applicant profile</h2>
         <hr>
 
-        <p>Name: <?= $A['first_name'] . ' ' . $A['last_name'] ?></p>
-        <p>DOB: <?= $A['dob'] ?></p>
-        <p>Gender: <?= $A['gender'] ?></p>
+        <p class="applicant-name"><?= $A['first_name'] . ' ' . $A['last_name'] ?></p>
+        <p class="applicant-dob"><?= $A['dob'] ?></p>
+        <p class="applicant-gender"><?= $A['gender'] ?></p>
 
-        <p>Address: <?= $A['street'] ?>, <?= $A['town'] ?>, <?= $A['state'] ?> <?= $A['postcode'] ?></p>
-        <p>Phone: <?= $A['phone'] ?></p>
+        <p class="applicant-address"><?= $A['street'] ?>, <?= $A['town'] ?>, <?= $A['state'] ?> <?= $A['postcode'] ?></p>
+        <p class="applicant-phone"><?= $A['phone'] ?></p>
 
-        <p>Can Background Check: <?= $A['can_check_background'] ? 'Yes' : 'No' ?></p>
-        <p>Is Convict: <?= $A['is_convict'] ? 'Yes' : 'No' ?></p>
-        <p>Is Veteran: <?= $A['is_veteran'] ? 'Yes' : 'No' ?></p>
-
+        <p class="applicant-background"><?= $A['can_check_background'] ? 'Yes' : 'No' ?></p>
+        <p class="applicant-convict"><?= $A['is_convict'] ? 'Yes' : 'No' ?></p>
+        <p class="applicant-veteran"><?= $A['is_veteran'] ? 'Yes' : 'No' ?></p>
         <hr>
 
         <p>EOI Extra: <?= $D['extra'] ?></p>
         <p>Reason: <?= $D['reason'] ?></p>
 
+        <br><br>
+        
+        <h2>Job applied for</h2>
         <hr>
+        <p class="job-ident"><?= $J->id ?></p>
+		<p class="job-company"><?= html_sanitize($J->company) ?></p>
+		<p class="job-superior"> <?= html_sanitize($J->superior) ?></p>
+		<p class="job-description flex-y"><?= html_sanitize($J->description) ?></p>
+		<div class="job-essentials"></div>
+		<ul>
+			<li class="job-langs"><?= html_sanitize($J->reqs->must['langs']) ?>.</li>
+			<li class="job-frameworks"><?= html_sanitize($J->reqs->must['tools']) ?>.</li>
+			<li class="job-experience">
+				<?= $J->experience->begin ?> ~ <?= $J->experience->end ?> years.
+			</li>
+		</ul>
+		<div class="job-preferences"></div>
+		<ul>
+			<?php
+			foreach ($J->reqs->opts as $opt) {
+				$pref = html_sanitize($opt);
+				echo "<li>$pref.</li>";
+			}
+			?>
+		</ul>
+        <hr><br>
+        
         
         
 
@@ -68,6 +95,8 @@
             </select>
         </form>
     </div>
+
+    
 
 
         

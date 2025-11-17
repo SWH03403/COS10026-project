@@ -2,13 +2,7 @@
 Session::require_user(true);
 
 $db = Database::get();
-$infos = [];
-
-foreach ($db->query('SELECT * FROM eoi') as $row) {
-    $applicant_info = $db->query('SELECT * FROM user_applicant WHERE id = ?', [$row['user_id']]);
-    //$applicant_info[0]['Name'] = $applicant_info[0]['first_name'] . ' ' . $applicant_info[0]['last_name'];
-    $infos[] = $row + ['applicant_info' => $applicant_info];
-}
+$infos = getAndMergeEOIInfos($db);
 
 render_page(function() use ($infos) {
 	$search = $_GET['search'] ?? '';

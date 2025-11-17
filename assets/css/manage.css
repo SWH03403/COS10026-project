@@ -61,3 +61,24 @@
 	width: 50%;
 	border-radius: 0% 0% 0% 0%;
 }
+
+
+.job-ident::before { content: "Ref. Number:"; }
+.job-company::before { content: "Company:"; }
+.job-superior::before { content: "Report to:"; }
+.job-langs::before { content: "Languages:"; }
+.job-frameworks::before { content: "Frameworks:"; }
+.job-experience::before { content: "Experience:"; }
+.job-essentials::before { content: "Essential qualifications:" }
+.job-preferences::before { content: "Preferable qualifications:" }
+
+.applicant-name::before { content: "Name:"; }
+.applicant-dob::before { content: "Date of Birth:"; }
+.applicant-gender::before { content: "Gender:"; }
+.applicant-address::before { content: "Address:"; }
+.applicant-phone::before { content: "Phone:"; }
+.applicant-background::before { content: "Can Background Check:"; }
+.applicant-convict::before { content: "Is Convict:"; }
+.applicant-veteran::before { content: "Is Veteran:"; }
+.applicant-extra::before { content: "EOI Extra:"; }
+.applicant-reason::before { content: "Reason:"; }
