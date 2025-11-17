@@ -1,42 +1,8 @@
 @import "global.css";
 
 #content {
-	width: 1200px;
-	min-width: 75%;
-	flex-direction: row;
-	align-items: flex-start;
-
-	h1 {
-		z-index: 1; /* Raise header so its shadow is over the listings */
-		border-radius: .5em;
-	}
-	h2 { line-height: 1em; margin-bottom: .2em; } /* Fix high line gaps caused by Poppins font */
-
-	/* The `summary` element is used to show/hide content of the `details` element with a click.
-	 * This expands the element to exactly cover the listing box, turning the box into a button. */
-	article {
-		flex-grow: 1;
-		max-width: 100%;
-
-		position: relative; /* Anchor */
-		padding: 20px;
-		border-radius: 1em;
-		justify-content: flex-start;
-	}
-
-	article:has(> details[open]) {
-		flex-basis: 100%;
-		background: #eaeaea;
-		summary {
-			height: 10%;
-		}
-	}
-
-	*::before {
-		margin-right: .5em; /* Lazy whitespace */
-		font-weight: bold;
-	}
-
+	width: 1600px;
+	max-width: 100%;
 }
 
 #search-bar {
@@ -55,36 +21,42 @@
 	}
 }
 
-#outer-box, #tool-box {
-	gap: var(--spacing);
-	align-items: stretch;
-}
-
-#single_eoi {
-	align-self: stretch;
-}
-
-#listing-eois {
-	flex-direction: column;
+#eoi-listing {
+	flex-flow: row wrap;
+	align-items: flex-start;
+	align-content: flex-start;
 	gap: var(--spacing);
 }
 
-#other-tools {
-	width: 50%;
-	border-radius: 0% 0% 0% 0%;
+details.eoi-entry {
+	flex-grow: 1;
+	width: unset;
+	height: unset;
+
+	min-width: 200px;
+	&:not([open]) { max-width: 300px; }
+
+	summary {
+		position: unset;
+		gap: var(--spacing);
+	}
+
+	p {
+		text-align: right;
+		display: flex;
+		font-weight: 600;
+	}
+	p::before { flex: 1; margin-right: 5px; }
+	p::after { margin-left: 5px; }
+	p::before, p::after {
+		text-align: left;
+		font-weight: 400;
+	}
 }
 
+.eoi-salary::before { content: "Desired Salary:"; }
+.eoi-salary::after { content: " / years"; }
 
-.job-ident::before { content: "Ref. Number:"; }
-.job-company::before { content: "Company:"; }
-.job-superior::before { content: "Report to:"; }
-.job-langs::before { content: "Languages:"; }
-.job-frameworks::before { content: "Frameworks:"; }
-.job-experience::before { content: "Experience:"; }
-.job-essentials::before { content: "Essential qualifications:" }
-.job-preferences::before { content: "Preferable qualifications:" }
-
-.applicant-name::before { content: "Name:"; }
 .applicant-dob::before { content: "Date of Birth:"; }
 .applicant-gender::before { content: "Gender:"; }
 .applicant-address::before { content: "Address:"; }
@@ -92,5 +64,7 @@
 .applicant-background::before { content: "Can Background Check:"; }
 .applicant-convict::before { content: "Is Convict:"; }
 .applicant-veteran::before { content: "Is Veteran:"; }
-.applicant-extra::before { content: "EOI Extra:"; }
-.applicant-reason::before { content: "Reason:"; }
+
+.job-name::before { content: "Name:"; }
+.job-company::before { content: "Company:"; }
+.job-location::before { content: "Location:"; }

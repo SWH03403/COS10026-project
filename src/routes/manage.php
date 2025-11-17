@@ -80,6 +80,10 @@ render_page(function() use (&$records) {
 	], required: false, default: 'id');
 	render('input/submit', 'Search');
 	echo '</form>';
+
+	echo '<div id="eoi-listing" class="fill flex flex-o">';
+	foreach ($records as $data) { render('eoi', $data); }
+	echo '</div>';
 },
 	title: 'Management',
 	style: 'manage',
